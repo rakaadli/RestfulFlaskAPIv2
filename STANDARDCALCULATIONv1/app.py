@@ -9,7 +9,7 @@ api = Api(app)
 def checkPostedData(postedData, functionName):
     if (functionName == "add" or functionName == "subtract" or functionName == "multiply"):
         if "x" not in postedData or "y" not in postedData:
-            return 301 #Missing parameter
+            return 301 #Apabila ada Missing parameter
         else:
             return 200
     elif (functionName == "division"):
@@ -22,12 +22,12 @@ def checkPostedData(postedData, functionName):
 
 class Add(Resource):
     def post(self):
-        #If I am here, then the resouce Add was requested using the method POST
+        #Jika ditambah, resource mendapatkan request menggunakan method POST
 
-        #Step 1: Get posted data:
+        #Step 1: AMBIL POSTED DATA (Dari postman)
         postedData = request.get_json()
 
-        #Steb 1b: Verify validity of posted data
+        #Steb 1b: verifikasi hasil posted data
         status_code = checkPostedData(postedData, "add")
         if (status_code!=200):
             retJson = {
@@ -36,13 +36,13 @@ class Add(Resource):
             }
             return jsonify(retJson)
 
-        #If i am here, then status_code == 200
+        #Akan lanjut kesini jika status_code == 200
         x = postedData["x"]
         y = postedData["y"]
         x = int(x)
         y = int(y)
 
-        #Step 2: Add the posted data
+        #Step 2: Posted data ditambah
         ret = x+y
         retMap = {
             'Message': ret,
@@ -52,12 +52,12 @@ class Add(Resource):
 
 class Subtract(Resource):
     def post(self):
-        #If I am here, then the resouce Subtract was requested using the method POST
+        #Jika dikurang, resource mendapatkan request menggunakan method POST
 
-        #Step 1: Get posted data:
+        #Step 1: AMBIL POSTED DATA (Dari postman)
         postedData = request.get_json()
 
-        #Steb 1b: Verify validity of posted data
+        #Steb 1b: verifikasi hasil posted data
         status_code = checkPostedData(postedData, "subtract")
 
 
@@ -68,13 +68,13 @@ class Subtract(Resource):
             }
             return jsonify(retJson)
 
-        #If i am here, then status_code == 200
+        #Akan lanjut kesini jika status_code == 200
         x = postedData["x"]
         y = postedData["y"]
         x = int(x)
         y = int(y)
 
-        #Step 2: Subtract the posted data
+        #Step 2: Kurangi hasil posted data
         ret = x-y
         retMap = {
             'Message': ret,
@@ -85,12 +85,12 @@ class Subtract(Resource):
 
 class Multiply(Resource):
     def post(self):
-        #If I am here, then the resouce Multiply was requested using the method POST
+        #Jika dikalikan, resource mendapatkan request menggunakan method POST
 
         #Step 1: Get posted data:
         postedData = request.get_json()
 
-        #Steb 1b: Verify validity of posted data
+       #Steb 1b: verifikasi hasil posted data
         status_code = checkPostedData(postedData, "multiply")
 
 
@@ -101,13 +101,13 @@ class Multiply(Resource):
             }
             return jsonify(retJson)
 
-        #If i am here, then status_code == 200
+        #Akan lanjut kesini jika status_code == 200
         x = postedData["x"]
         y = postedData["y"]
         x = int(x)
         y = int(y)
 
-        #Step 2: Multiply the posted data
+        #Step 2: Kalikan posted data
         ret = x*y
         retMap = {
             'Message': ret,
@@ -117,12 +117,12 @@ class Multiply(Resource):
 
 class Divide(Resource):
     def post(self):
-        #If I am here, then the resouce Divide was requested using the method POST
+        #Jika dibagi, resource mendapatkan request menggunakan method POST
 
         #Step 1: Get posted data:
         postedData = request.get_json()
 
-        #Steb 1b: Verify validity of posted data
+        #Steb 1b: verifikasi hasil posted data
         status_code = checkPostedData(postedData, "division")
 
 
@@ -133,7 +133,7 @@ class Divide(Resource):
             }
             return jsonify(retJson)
 
-        #If i am here, then status_code == 200
+        #Akan lanjut kesini jika status_code == 200
         x = postedData["x"]
         y = postedData["y"]
         x = int(x)
@@ -148,7 +148,7 @@ class Divide(Resource):
         return jsonify(retMap)
 
 
-
+#buat router disini
 api.add_resource(Add, "/add")
 api.add_resource(Subtract, "/subtract")
 api.add_resource(Multiply, "/multiply")

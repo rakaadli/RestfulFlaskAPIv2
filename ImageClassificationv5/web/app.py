@@ -39,7 +39,7 @@ class Register(Resource):
 
         hashed_pw = bcrypt.hashpw(password.encode('utf8'), bcrypt.gensalt())
 
-        #Store username and pw into the database
+        #Simpan username dan password beserta token ke database
         users.insert({
             "Username": username,
             "Password": hashed_pw,
